@@ -11,6 +11,15 @@ START_TEST(test_add_I_I)
 }
 END_TEST
 
+START_TEST(test_add_I_II)
+{
+	char *sum = malloc(strlen("I") + strlen("II") + 1);
+	add_numerals("I", "II", sum);
+	ck_assert_str_eq("III", sum);
+	free(sum);
+}
+END_TEST
+
 Suite * numeral_suite(void)
 {
 	Suite *s;
@@ -21,6 +30,7 @@ Suite * numeral_suite(void)
 	tc_core = tcase_create("Core");
 
 	tcase_add_test(tc_core, test_add_I_I);
+	tcase_add_test(tc_core, test_add_I_II);
 	suite_add_tcase(s, tc_core);
 
 	return s;
