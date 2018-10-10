@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <check.h>
+#include "numeral_calculator.h"
 
 START_TEST(test_add_I_I)
 {
