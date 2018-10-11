@@ -10,4 +10,10 @@ void add_numerals(char *operand1, char *operand2, char *sum)
 		memset(sum, 0, strlen(sum) + 1);
 		strcpy(sum, "IV");
 	}
+	if(strcmp(sum, "IIIII") == 0)
+	{
+		memset(sum, 0, strlen(sum) + 1);
+		strcpy(sum, "V");
+	}
+
 }
