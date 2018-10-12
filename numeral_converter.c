@@ -27,28 +27,17 @@ void numeral_to_decimal(char *numeral, int *decimal)
 
 void decimal_to_numeral(int decimal, char *numeral)
 {
-	if(decimal == 1)
+	int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+	char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+	int i;
+
+	for(i = 0; i < sizeof(decimal_list) / sizeof(decimal_list[0]); i++)
 	{
-		strcat(numeral, "I");
-	}
-	else if(decimal == 2)
-	{
-		strcat(numeral, "II");
-	}
-	else if(decimal == 3)
-	{
-		strcat(numeral, "III");
-	}
-	else if(decimal == 4)
-	{
-		strcat(numeral, "IV");
-	}
-	else if(decimal == 5)
-	{
-		strcat(numeral, "V");
-	}
-	else if(decimal == 6)
-	{
-		strcat(numeral, "VI");
+		while(decimal_list[i] <= decimal)
+		{
+			strcat(numeral, numeral_list[i]);
+			decimal -= decimal_list[i];
+		}
 	}
 }
