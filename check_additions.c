@@ -9,6 +9,7 @@
 	- Adding same character numerals that will include a different numeral in the result
 	- Adding numerals that will simplify to a single larger numeral
 	- Adding numerals that will simply only part of the larger numeral
+	- Adding numerals that are greater than MMMCMXCIX
 */
 
 START_TEST(test_add_I_I)
@@ -83,11 +84,20 @@ START_TEST(test_add_V_VI)
 }
 END_TEST
 
-START_TEST(test_add_I_MMMCCCXXXIII)
+START_TEST(test_add_X_MMMCCCXXXIII)
 {
 	char *sum = malloc(strlen("X") + strlen("MMMCCCXXXIII") + 1);
 	add_numerals("X", "MMMCCCXXXIII", sum);
 	ck_assert_str_eq("MMMCCCXLIII", sum);
+	free(sum);
+}
+END_TEST
+
+START_TEST(test_add_I_MMMCMXCIX)
+{
+	char *sum = malloc(strlen("I") + strlen("MMMCMXCIX") + 1);
+	add_numerals("I", "MMMCMXCIX", sum);
+	ck_assert_str_eq(NULL, sum);
 	free(sum);
 }
 END_TEST
@@ -109,7 +119,8 @@ Suite * additions_suite(void)
 	tcase_add_test(tc_core, test_add_I_V);
 	tcase_add_test(tc_core, test_add_I_VI);
 	tcase_add_test(tc_core, test_add_V_VI);
-	tcase_add_test(tc_core, test_add_I_MMMCCCXXXIII);
+	tcase_add_test(tc_core, test_add_X_MMMCCCXXXIII);
+	tcase_add_test(tc_core, test_add_I_MMMCMXCIX);
 	suite_add_tcase(s, tc_core);
 
 	return s;

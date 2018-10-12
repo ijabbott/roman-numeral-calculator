@@ -165,15 +165,6 @@ START_TEST(test_convert_MMMCMXCIX_to_3999)
 }
 END_TEST
 
-START_TEST(test_invalid_numeral_A)
-{
-	int decimal = 0;
-	
-	numeral_to_decimal("A", &decimal);
-	ck_assert_int_eq(0, decimal);
-}
-END_TEST
-
 Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
