@@ -47,6 +47,15 @@ START_TEST(test_add_I_IV)
 }
 END_TEST
 
+START_TEST(test_add_I_V)
+{
+	char *sum = malloc(strlen("I") + strlen("V") + 1);
+	add_numerals("I", "V", sum);
+	ck_assert_str_eq("VI", sum);
+	free(sum);
+}
+END_TEST
+
 Suite * calculation_suite(void)
 {
 	Suite *s;
@@ -61,6 +70,7 @@ Suite * calculation_suite(void)
 	tcase_add_test(tc_core, test_add_II_II);
 	tcase_add_test(tc_core, test_add_II_III);
 	tcase_add_test(tc_core, test_add_I_IV);
+	tcase_add_test(tc_core, test_add_I_V);
 	suite_add_tcase(s, tc_core);
 
 	return s;
