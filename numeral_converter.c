@@ -12,6 +12,7 @@ void numeral_to_decimal(char *numeral, int *decimal)
 	int list_index;
 	int numeral_index = 0;
 	int i;
+	int previous_value = 1000;
 
 	if(strstr(numeral, "IIII") != NULL ||
 	   strstr(numeral, "XXXX") != NULL ||
@@ -30,6 +31,7 @@ void numeral_to_decimal(char *numeral, int *decimal)
 			return;
 		}
 	}
+	
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
 	while(numeral_index < strlen(numeral))
 	{
@@ -37,9 +39,18 @@ void numeral_to_decimal(char *numeral, int *decimal)
 		{
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
-				*decimal += decimal_list[list_index];
-				numeral_index += strlen(numeral_list[list_index]);
-				break;
+				if(decimal_list[list_index] <= previous_value)
+				{
+					*decimal += decimal_list[list_index];
+					previous_value = decimal_list[list_index];
+					numeral_index += strlen(numeral_list[list_index]);
+					break;
+				}
+				else
+				{
+					*decimal = 0;
+					return;
+				}
 			}
 		}
 	}
