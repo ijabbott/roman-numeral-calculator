@@ -18,9 +18,13 @@ void numeral_to_decimal(char *numeral, int *decimal)
 				*decimal += 1;
 			}
 		}
-		if(numeral[i] == 'V')
+		else if(numeral[i] == 'V')
 		{
 			*decimal += 5;
+		}
+		else if(numeral[i] == 'X')
+		{
+			*decimal += 10;
 		}
 	}
 }
