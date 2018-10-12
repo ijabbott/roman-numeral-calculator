@@ -10,6 +10,7 @@
 	- Adding numerals that will simplify to a single larger numeral
 	- Adding numerals that will simply only part of the larger numeral
 	- Adding numerals where the result is greater than MMMCMXCIX
+	- Adding an invalid numeral
 */
 
 START_TEST(test_add_I_I)
