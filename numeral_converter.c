@@ -24,7 +24,18 @@ void numeral_to_decimal(char *numeral, int *decimal)
 		}
 		else if(numeral[i] == 'X')
 		{
-			*decimal += 10;
+			if(numeral[i + 1] == 'L')
+			{
+				*decimal -= 10;
+			}
+			else
+			{
+				*decimal += 10;
+			}
+		}
+		else if(numeral[i] == 'L')
+		{
+			*decimal += 50;
 		}
 	}
 }
