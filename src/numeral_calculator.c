@@ -18,6 +18,7 @@ static int decimal_in_range(int decimal);
 
 int add_numerals(char *operand1, char *operand2, char *sum)
 {
+	
 	return calculate_numerals(operand1, operand2, sum, ADDITION);
 }
 
