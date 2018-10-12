@@ -13,6 +13,11 @@ void numeral_to_decimal(char *numeral, int *decimal)
 	int numeral_index = 0;
 	int i;
 
+	if(strstr(numeral, "IIII") != NULL)
+	{
+		return;
+	}
+	
 	for(i = 0; i < strlen(numeral); i++)
 	{
 		if(strchr(valid_numerals, numeral[i]) == NULL)
