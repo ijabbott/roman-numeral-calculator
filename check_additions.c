@@ -96,10 +96,10 @@ END_TEST
 START_TEST(test_add_I_MMMCMXCIX)
 {
 	char *sum = malloc(strlen("I") + strlen("MMMCMXCIX") + 1);
-	int result = 0;
-	add_numerals("I", "MMMCMXCIX", sum);
+	int result;
+	result = add_numerals("I", "MMMCMXCIX", sum);
 	ck_assert_str_eq("", sum);
-	ck_assert_int_eq(0, result);
+	ck_assert_int_eq(1, result);
 	free(sum);
 }
 END_TEST

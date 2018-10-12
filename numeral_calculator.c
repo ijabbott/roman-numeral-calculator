@@ -3,11 +3,12 @@
 #include <string.h>
 #include "numeral_converter.h"
 
+#define MIN_VALUE 1
 #define MAX_VALUE 3999
 
 int add_numerals(char *operand1, char *operand2, char *sum)
 {
-	int result = 0;
+	int result = 1;
 	int decimal_sum = 0;
 	int decimal1 = 0;
 	int decimal2 = 0;
@@ -20,16 +21,16 @@ int add_numerals(char *operand1, char *operand2, char *sum)
 	if(decimal_sum < MAX_VALUE)
 	{
 		decimal_to_numeral(decimal_sum, sum);
-		result = 1;
+		result = 0;
 	}
 
 	return result;
 }
 
-void subtract_numerals(char *operand1, char *operand2, char *difference)
+int subtract_numerals(char *operand1, char *operand2, char *difference)
 {
+	int result = 1;
 	int decimal_difference = 0;
-
 	int decimal1 = 0;
 	int decimal2 = 0;
 
@@ -38,5 +39,11 @@ void subtract_numerals(char *operand1, char *operand2, char *difference)
 
 	decimal_difference = decimal1 - decimal2;
 
-	decimal_to_numeral(decimal_difference, difference);
+	if(decimal_difference >= MIN_VALUE)
+	{
+		decimal_to_numeral(decimal_difference, difference);
+		result = 0;
+	}
+
+	return result;	
 }

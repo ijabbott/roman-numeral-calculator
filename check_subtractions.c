@@ -9,6 +9,7 @@
 	- Subtracting numerals that contain all of the same character
 	- Subtracting numerals that contain different characters
 	- Subtracting from a numeral that will cause it to expand into smaller numerals
+	- Subtracting from a numeral that will cause a result below or equal to 0
 */
 
 START_TEST(test_subtract_II_I)
@@ -38,6 +39,17 @@ START_TEST(test_subtract_XL_I)
 }
 END_TEST
 
+START_TEST(test_subtract_I_I)
+{
+	char *difference = malloc(MAX_LENGTH);
+	int result;
+	result = subtract_numerals("I", "I", difference);
+	ck_assert_str_eq("", difference);
+	ck_assert_int_eq(1, result);
+	free(difference);
+}
+END_TEST
+
 Suite * subtractions_suite(void)
 {
 	Suite *s;
@@ -50,6 +62,7 @@ Suite * subtractions_suite(void)
 	tcase_add_test(tc_core, test_subtract_II_I);
 	tcase_add_test(tc_core, test_subtract_XV_VIII);
 	tcase_add_test(tc_core, test_subtract_XL_I);
+	tcase_add_test(tc_core, test_subtract_I_I);
 
 	suite_add_tcase(s, tc_core);
 
