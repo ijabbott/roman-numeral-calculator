@@ -128,6 +128,17 @@ START_TEST(test_add_I_MMMM)
 }
 END_TEST
 
+START_TEST(test_add_I_empty)
+{
+	char *sum = malloc(strlen("I") + strlen("") + 1);
+	int result;
+	result = add_numerals("I", "", sum);
+	ck_assert_str_eq("", sum);
+	ck_assert_int_eq(1, result);
+	free(sum);
+}
+END_TEST
+
 Suite * additions_suite(void)
 {
 	Suite *s;
@@ -149,6 +160,7 @@ Suite * additions_suite(void)
 	tcase_add_test(tc_core, test_add_I_MMMCMXCIX);
 	tcase_add_test(tc_core, test_add_I_A);
 	tcase_add_test(tc_core, test_add_I_MMMM);
+	tcase_add_test(tc_core, test_add_I_empty);
 	suite_add_tcase(s, tc_core);
 
 	return s;
