@@ -3,39 +3,21 @@
 
 void numeral_to_decimal(char *numeral, int *decimal)
 {	
-	int i;
+	int decimal_list[] = {900, 400, 90, 40, 9, 4, 1000, 500, 100, 50, 10, 5, 1};
+	char *numeral_list[] = {"CM", "CD", "XC", "XL", "IX", "IV", "M", "D", "C", "L", "X", "V", "I"};
+
+	int j ;
+	int i = 0;
 	
-	for(i = 0; i < strlen(numeral); i++)
+	while(i < strlen(numeral))
 	{
-		if(numeral[i] == 'I')
+		for(j = 0; j < sizeof(numeral_list)/sizeof(numeral_list[0]); j++)
 		{
-			if(numeral[i + 1] == 'V' || numeral[i + 1] == 'X')
+			if(strncmp(&numeral[i], numeral_list[j], strlen(numeral_list[j])) == 0)
 			{
-				*decimal -= 1;
+				*decimal += decimal_list[j];
+				i += strlen(numeral_list[j]);
 			}
-			else
-			{
-				*decimal += 1;
-			}
-		}
-		else if(numeral[i] == 'V')
-		{
-			*decimal += 5;
-		}
-		else if(numeral[i] == 'X')
-		{
-			if(numeral[i + 1] == 'L')
-			{
-				*decimal -= 10;
-			}
-			else
-			{
-				*decimal += 10;
-			}
-		}
-		else if(numeral[i] == 'L')
-		{
-			*decimal += 50;
 		}
 	}
 }
