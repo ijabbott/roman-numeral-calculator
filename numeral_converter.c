@@ -9,7 +9,7 @@ void numeral_to_decimal(char *numeral, int *decimal)
 	{
 		if(numeral[i] == 'I')
 		{
-			if(numeral[i + 1] == 'V')
+			if(numeral[i + 1] == 'V' || numeral[i + 1] == 'X')
 			{
 				*decimal -= 1;
 			}
