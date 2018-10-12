@@ -57,9 +57,9 @@ static int is_numeral_valid(char *numeral)
 	int previous_value = decimal_list[numeral_index];
 
 	// Check for invalid characters
-	for(i = 0; i < strlen(numeral); i++)
+	for(string_index = 0; string_index < strlen(numeral); string_index++)
 	{
-		if(strchr(valid_characters, numeral[i]) == NULL)
+		if(strchr(valid_characters, numeral[string_index]) == NULL)
 		{
 			return 0;
 		}
