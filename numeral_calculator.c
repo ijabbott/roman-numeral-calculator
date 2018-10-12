@@ -13,17 +13,16 @@ int add_numerals(char *operand1, char *operand2, char *sum)
 	int decimal1 = 0;
 	int decimal2 = 0;
 
-	numeral_to_decimal(operand1, &decimal1);
-	numeral_to_decimal(operand2, &decimal2);
-
-	decimal_sum = decimal1 + decimal2;
-
-	if(decimal_sum < MAX_VALUE)
+	if(numeral_to_decimal(operand1, &decimal1) == 0 && numeral_to_decimal(operand2, &decimal2) == 0)
 	{
-		decimal_to_numeral(decimal_sum, sum);
-		result = 0;
-	}
+		decimal_sum = decimal1 + decimal2;
 
+		if(decimal_sum < MAX_VALUE)
+		{
+			decimal_to_numeral(decimal_sum, sum);
+			result = 0;
+		}
+	}
 	return result;
 }
 

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 
 static int is_numeral_valid(char *numeral);
@@ -9,14 +9,14 @@ const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1
 const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 const char valid_characters[] = {'M', 'D', 'C', 'L', 'X', 'V', 'I', '\0'};
 
-void numeral_to_decimal(char *numeral, int *decimal)
+int numeral_to_decimal(char *numeral, int *decimal)
 {	
 	int list_index;
 	int numeral_index = 0;
 
 	if(!is_numeral_valid(numeral))
 	{
-		return;
+		return 1;
 	}
 
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
@@ -32,9 +32,11 @@ void numeral_to_decimal(char *numeral, int *decimal)
 			}
 		}
 	}
+
+	return 0;
 }
 
-void decimal_to_numeral(int decimal, char *numeral)
+int decimal_to_numeral(int decimal, char *numeral)
 {
 	int list_index;
 
@@ -47,6 +49,8 @@ void decimal_to_numeral(int decimal, char *numeral)
 			decimal -= decimal_list[list_index];
 		}
 	}
+
+	return 0;
 }
 
 static int is_numeral_valid(char *numeral)
