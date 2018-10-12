@@ -13,7 +13,12 @@ void numeral_to_decimal(char *numeral, int *decimal)
 	int numeral_index = 0;
 	int i;
 
-	if(strstr(numeral, "IIII") != NULL)
+	if(strstr(numeral, "IIII") != NULL ||
+	   strstr(numeral, "XXXX") != NULL ||
+	   strstr(numeral, "CCCC") != NULL ||
+	   strstr(numeral, "VV")   != NULL ||
+	   strstr(numeral, "LL")   != NULL ||
+	   strstr(numeral, "DD")   != NULL)
 	{
 		return;
 	}
