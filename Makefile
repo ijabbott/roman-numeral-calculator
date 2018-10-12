@@ -1,5 +1,5 @@
 CC = gcc
-FILES = check_numerals.c numeral_calculator.c numeral_converter.c
+FILES = check_calculations.c check_conversions.c numeral_calculator.c numeral_converter.c suite_runner.c
 OUTPUT = run_tests
 CFLAGS = -Wall
 TST_LIBS = -lcheck -lm -lpthread -lrt

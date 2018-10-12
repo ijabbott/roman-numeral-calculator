@@ -4,7 +4,7 @@
 void numeral_to_decimal(char *numeral, int *decimal)
 {	
 	int i;
-
+	
 	for(i = 0; i < strlen(numeral); i++)
 	{
 		if(numeral[i] == 'I')
