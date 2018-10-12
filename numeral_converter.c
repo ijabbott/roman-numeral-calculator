@@ -47,4 +47,8 @@ void decimal_to_numeral(int decimal, char *numeral)
 	{
 		strcat(numeral, "V");
 	}
+	else if(decimal == 6)
+	{
+		strcat(numeral, "VI");
+	}
 }
