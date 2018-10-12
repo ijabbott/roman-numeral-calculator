@@ -14,6 +14,8 @@ typedef enum Operation_E
 
 static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, Operation_T op);
 
+static int decimal_in_range(int decimal);
+
 int add_numerals(char *operand1, char *operand2, char *sum)
 {
 	return calculate_numerals(operand1, operand2, sum, ADDITION);
@@ -33,7 +35,7 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 
 	if(numeral_to_decimal(operand1, &decimal1) == 0 && numeral_to_decimal(operand2, &decimal2) == 0)
 	{
-		if(decimal1 >= MIN_VALUE && decimal1 <= MAX_VALUE)
+		if(decimal_in_range(decimal1) == 0 && decimal_in_range(decimal2) == 0)
 		{
 			if(op == ADDITION)
 			{
@@ -44,12 +46,24 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 				decimal_result = decimal1 - decimal2;
 			}
 
-			if(decimal_result >= MIN_VALUE && decimal_result <= MAX_VALUE)
+			if(decimal_in_range(decimal_result) == 0)
 			{
 				decimal_to_numeral(decimal_result, numeral_result);
 				result = 0;
 			}
 		}
+	}
+
+	return result;
+}
+
+static int decimal_in_range(int decimal)
+{
+	int result = 1;
+
+	if(decimal >= MIN_VALUE && decimal <= MAX_VALUE)
+	{
+		result = 0;
 	}
 
 	return result;
