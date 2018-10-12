@@ -10,14 +10,14 @@ CFLAGS = -Wall
 TST_LIBS = -lcheck -lm -lpthread -lrt
 DIR = ./src
 
-all: testsuite library demoprogram clean
+all: testsuite library demoprogram
 
 testsuite: $(FILES) $(TEST_FILES)
 	$(CC) $(CFLAGS) $(FILES) $(TEST_FILES) -o $(TEST_OUTPUT) -I $(DIR) $(TST_LIBS)
 
 library: $(FILES) $(FILE_OBJECTS)
 	$(CC) $(CFLAGS) $(FILES) -c
-	ar rcs $(LIB_NAME) $(FILES) $(FILE_OBJECTS)
+	ar rcs $(LIB_NAME) $(FILES) $(FILE_OBJECTS) 
 
 demoprogram: $(DEMO_PROGRAM)
 	$(CC) $(CFLAGS) $(DEMO_PROGRAM) -o $(DEMO_OUTPUT) -I $(DIR) ./$(LIB_NAME)
