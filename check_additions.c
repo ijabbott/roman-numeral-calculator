@@ -9,7 +9,7 @@
 	- Adding same character numerals that will include a different numeral in the result
 	- Adding numerals that will simplify to a single larger numeral
 	- Adding numerals that will simply only part of the larger numeral
-	- Adding numerals that are greater than MMMCMXCIX
+	- Adding numerals where the result is greater than MMMCMXCIX
 */
 
 START_TEST(test_add_I_I)
@@ -96,8 +96,10 @@ END_TEST
 START_TEST(test_add_I_MMMCMXCIX)
 {
 	char *sum = malloc(strlen("I") + strlen("MMMCMXCIX") + 1);
+	int result = 0;
 	add_numerals("I", "MMMCMXCIX", sum);
-	ck_assert_str_eq(NULL, sum);
+	ck_assert_str_eq("", sum);
+	ck_assert_int_eq(0, result);
 	free(sum);
 }
 END_TEST
