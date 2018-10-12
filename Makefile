@@ -1,5 +1,5 @@
 CC = gcc
-FILES = check_calculations.c check_roman_to_decimal.c check_decimal_to_roman.c numeral_calculator.c numeral_converter.c suite_runner.c
+FILES = check_additions.c check_subtractions.c check_roman_to_decimal.c check_decimal_to_roman.c numeral_calculator.c numeral_converter.c suite_runner.c
 OUTPUT = run_tests
 CFLAGS = -Wall
 TST_LIBS = -lcheck -lm -lpthread -lrt

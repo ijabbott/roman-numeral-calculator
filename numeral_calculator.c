@@ -17,3 +17,8 @@ void add_numerals(char *operand1, char *operand2, char *sum)
 
 	decimal_to_numeral(decimal_sum, sum);
 }
+
+void subtract_numerals(char *operand1, char *operand2, char *difference)
+{
+
+}

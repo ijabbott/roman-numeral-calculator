@@ -1,6 +1,15 @@
 #include <stdlib.h>
 #include <check.h>
+#include "check_additions.h"
 #include "numeral_calculator.h"
+
+/* Cases Covered
+	- Adding identical numerals
+	- Adding numerals contain all of the same character
+	- Adding same character numerals that will include a different numeral in the result
+	- Adding numerals that will simplify to a single larger numeral
+	- Adding numerals that will simply only part of the larger numeral
+*/
 
 START_TEST(test_add_I_I)
 {
@@ -83,12 +92,12 @@ START_TEST(test_add_I_MMMCCCXXXIII)
 }
 END_TEST
 
-Suite * calculation_suite(void)
+Suite * additions_suite(void)
 {
 	Suite *s;
 	TCase *tc_core;
 
-	s = suite_create("Calculation Tests");
+	s = suite_create("Addition Tests");
 
 	tc_core = tcase_create("Core");
 
