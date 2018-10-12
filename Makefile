@@ -2,13 +2,15 @@ CC = gcc
 TEST_FILES = $(wildcard tests/*.c)
 TEST_OUTPUT = run_tests
 FILES = $(wildcard src/*.c)
-FILE_OBJECTS = $(wildcard src/*.o)
+FILE_OBJECTS = $(wildcard src/*.c)
+DEMO_PROGRAM = demo/demo_program.c
+DEMO_OUTPUT = demo_program
 LIB_NAME = libnumeralcalculator.a
 CFLAGS = -Wall
 TST_LIBS = -lcheck -lm -lpthread -lrt
 DIR = ./src
 
-all: testsuite library clean
+all: testsuite library demoprogram clean
 
 testsuite: $(FILES) $(TEST_FILES)
 	$(CC) $(CFLAGS) $(FILES) $(TEST_FILES) -o $(TEST_OUTPUT) -I $(DIR) $(TST_LIBS)
@@ -17,6 +19,8 @@ library: $(FILES) $(FILE_OBJECTS)
 	$(CC) $(CFLAGS) $(FILES) -c
 	ar rcs $(LIB_NAME) $(FILES) $(FILE_OBJECTS)
 
+demoprogram: $(DEMO_PROGRAM)
+	$(CC) $(CFLAGS) $(DEMO_PROGRAM) -o $(DEMO_OUTPUT) -I $(DIR) ./$(LIB_NAME)
 clean: 
 	rm -rf *.o
 
