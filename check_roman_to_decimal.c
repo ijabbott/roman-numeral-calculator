@@ -30,6 +30,15 @@ START_TEST(test_convert_V_to_5)
 }
 END_TEST
 
+START_TEST(test_convert_IX_to_9)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IX", &decimal);
+	ck_assert_int_eq(9, decimal);
+}
+END_TEST
+
 START_TEST(test_convert_X_to_10)
 {
 	int decimal = 0;
@@ -51,6 +60,7 @@ Suite * roman_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_I_to_1);
 	tcase_add_test(tc_core, test_convert_IV_to_4);
 	tcase_add_test(tc_core, test_convert_V_to_5);
+	tcase_add_test(tc_core, test_convert_IX_to_9);
 	tcase_add_test(tc_core, test_convert_X_to_10);
 
 	suite_add_tcase(s, tc_core);
