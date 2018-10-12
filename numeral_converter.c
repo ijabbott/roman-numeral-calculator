@@ -1,22 +1,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
+
+const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
 void numeral_to_decimal(char *numeral, int *decimal)
 {	
-	int decimal_list[] = {900, 400, 90, 40, 9, 4, 1000, 500, 100, 50, 10, 5, 1};
-	char *numeral_list[] = {"CM", "CD", "XC", "XL", "IX", "IV", "M", "D", "C", "L", "X", "V", "I"};
-
-	int j ;
-	int i = 0;
+	int list_index;
+	int numeral_index = 0;
 	
-	while(i < strlen(numeral))
+	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
+	while(numeral_index < strlen(numeral))
 	{
-		for(j = 0; j < sizeof(numeral_list)/sizeof(numeral_list[0]); j++)
+		for(list_index = 0; list_index < NELEMS(numeral_list); list_index++)
 		{
-			if(strncmp(&numeral[i], numeral_list[j], strlen(numeral_list[j])) == 0)
+			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
-				*decimal += decimal_list[j];
-				i += strlen(numeral_list[j]);
+				*decimal += decimal_list[list_index];
+				numeral_index += strlen(numeral_list[list_index]);
 			}
 		}
 	}
@@ -24,17 +27,15 @@ void numeral_to_decimal(char *numeral, int *decimal)
 
 void decimal_to_numeral(int decimal, char *numeral)
 {
-	int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-	char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	int list_index;
 
-	int i;
-
-	for(i = 0; i < sizeof(decimal_list) / sizeof(decimal_list[0]); i++)
+	// Subtract the largest possible numeral value, adding that value to the string with each iteration
+	for(list_index = 0; list_index < NELEMS(decimal_list); list_index++)
 	{
-		while(decimal_list[i] <= decimal)
+		while(decimal_list[list_index] <= decimal)
 		{
-			strcat(numeral, numeral_list[i]);
-			decimal -= decimal_list[i];
+			strcat(numeral, numeral_list[list_index]);
+			decimal -= decimal_list[list_index];
 		}
 	}
 }
