@@ -3,7 +3,7 @@
 #include "check_subtractions.h"
 #include "numeral_calculator.h"
 
-#define MAX_LENGTH 12 // MMMCCCXXXIII
+#define MAX_LENGTH 15 // MMCMCCXCXXIXIII
 
 /* Cases Covered
 	- Subtracting numerals that contain all of the same character

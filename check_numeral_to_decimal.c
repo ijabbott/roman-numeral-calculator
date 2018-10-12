@@ -184,6 +184,51 @@ START_TEST(test_invalid_numeral_IIII)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_XXXX)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("XXXX", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
+START_TEST(test_invalid_numeral_CCCC)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("CCCC", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
+START_TEST(test_invalid_numeral_VV)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("VV", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
+START_TEST(test_invalid_numeral_LL)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("LL", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
+START_TEST(test_invalid_numeral_DD)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("DD", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
@@ -212,6 +257,11 @@ Suite * numeral_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_MMMCMXCIX_to_3999);
 	tcase_add_test(tc_core, test_invalid_numeral_A);
 	tcase_add_test(tc_core, test_invalid_numeral_IIII);
+	tcase_add_test(tc_core, test_invalid_numeral_XXXX);
+	tcase_add_test(tc_core, test_invalid_numeral_CCCC);
+	tcase_add_test(tc_core, test_invalid_numeral_VV);
+	tcase_add_test(tc_core, test_invalid_numeral_LL);
+	tcase_add_test(tc_core, test_invalid_numeral_DD);
 
 	suite_add_tcase(s, tc_core);
 

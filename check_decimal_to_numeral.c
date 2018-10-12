@@ -3,7 +3,7 @@
 #include "check_decimal_to_numeral.h"
 #include "numeral_converter.h"
 
-#define MAX_LENGTH 12 // MMMCCCXXXIII
+#define MAX_LENGTH 15 // MMCMCCXCXXIXIII
 
 /* Cases Covered
 	- Each individual numeral
