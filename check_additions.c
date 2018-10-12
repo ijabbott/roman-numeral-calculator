@@ -11,6 +11,7 @@
 	- Adding numerals that will simply only part of the larger numeral
 	- Adding numerals where the result is greater than MMMCMXCIX
 	- Adding an invalid numeral
+	- Adding any numeral greater than MMMCMXCIX
 */
 
 START_TEST(test_add_I_I)
@@ -116,6 +117,17 @@ START_TEST(test_add_I_A)
 }
 END_TEST
 
+START_TEST(test_add_I_MMMM)
+{
+	char *sum = malloc(strlen("I") + strlen("MMMM") + 1);
+	int result;
+	result = add_numerals("I", "MMMM", sum);
+	ck_assert_str_eq("", sum);
+	ck_assert_int_eq(1, result);
+	free(sum);
+}
+END_TEST
+
 Suite * additions_suite(void)
 {
 	Suite *s;
@@ -136,6 +148,7 @@ Suite * additions_suite(void)
 	tcase_add_test(tc_core, test_add_X_MMMCCCXXXIII);
 	tcase_add_test(tc_core, test_add_I_MMMCMXCIX);
 	tcase_add_test(tc_core, test_add_I_A);
+	tcase_add_test(tc_core, test_add_I_MMMM);
 	suite_add_tcase(s, tc_core);
 
 	return s;
