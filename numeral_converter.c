@@ -60,6 +60,11 @@ static int is_numeral_valid(char *numeral)
 	int numeral_index = 0;
 	int previous_value = decimal_list[numeral_index];
 
+	if(strlen(numeral) == 0)
+	{
+		return 0;
+	}
+
 	// Check for invalid characters
 	for(string_index = 0; string_index < strlen(numeral); string_index++)
 	{
