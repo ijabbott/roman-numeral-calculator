@@ -20,5 +20,15 @@ void add_numerals(char *operand1, char *operand2, char *sum)
 
 void subtract_numerals(char *operand1, char *operand2, char *difference)
 {
+	int decimal_difference = 0;
 
+	int decimal1 = 0;
+	int decimal2 = 0;
+
+	numeral_to_decimal(operand1, &decimal1);
+	numeral_to_decimal(operand2, &decimal2);
+
+	decimal_difference = decimal1 - decimal2;
+
+	decimal_to_numeral(decimal_difference, difference);
 }
