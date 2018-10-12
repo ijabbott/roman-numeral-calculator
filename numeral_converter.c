@@ -20,6 +20,7 @@ void numeral_to_decimal(char *numeral, int *decimal)
 			{
 				*decimal += decimal_list[list_index];
 				numeral_index += strlen(numeral_list[list_index]);
+				break;
 			}
 		}
 	}

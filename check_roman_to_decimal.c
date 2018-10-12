@@ -10,6 +10,7 @@
 	- Lesser numeral after larger numeral
 	- Lesser numeral between two larger numerals
 	- Maximum numeral 
+	- Invalid numerals
 */
 
 START_TEST(test_convert_I_to_1)
@@ -165,6 +166,15 @@ START_TEST(test_convert_MMMCMXCIX_to_3999)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_A)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("A", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 Suite * roman_to_decimal_suite(void)
 {
 	Suite *s;
@@ -191,6 +201,7 @@ Suite * roman_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_D_to_500);
 	tcase_add_test(tc_core, test_convert_M_to_1000);
 	tcase_add_test(tc_core, test_convert_MMMCMXCIX_to_3999);
+	tcase_add_test(tc_core, test_invalid_numeral_A);
 
 	suite_add_tcase(s, tc_core);
 
