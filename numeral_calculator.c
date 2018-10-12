@@ -38,7 +38,7 @@ int subtract_numerals(char *operand1, char *operand2, char *difference)
 	{
 		decimal_difference = decimal1 - decimal2;
 
-		if(decimal_difference >= MIN_VALUE)
+		if(decimal_difference >= MIN_VALUE && decimal1 < MAX_VALUE && decimal2 < MAX_VALUE)
 		{
 			decimal_to_numeral(decimal_difference, difference);
 			result = 0;
