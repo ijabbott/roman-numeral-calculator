@@ -9,7 +9,14 @@ void numeral_to_decimal(char *numeral, int *decimal)
 	{
 		if(numeral[i] == 'I')
 		{
-			*decimal += 1;
+			if(numeral[i + 1] == 'V')
+			{
+				*decimal -= 1;
+			}
+			else
+			{
+				*decimal += 1;
+			}
 		}
 		if(numeral[i] == 'V')
 		{
