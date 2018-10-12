@@ -11,6 +11,15 @@ START_TEST(test_convert_I_to_1)
 }
 END_TEST
 
+START_TEST(test_convert_IV_to_4)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IV", &decimal);
+	ck_assert_int_eq(4, decimal);
+}
+END_TEST
+
 START_TEST(test_convert_V_to_5)
 {
 	int decimal = 0;
@@ -26,6 +35,7 @@ START_TEST(test_convert_1_to_I)
 	
 	decimal_to_numeral(1, numeral);
 	ck_assert_str_eq("I", numeral);
+	free(numeral);
 }
 END_TEST
 
@@ -35,6 +45,7 @@ START_TEST(test_convert_5_to_V)
 	
 	decimal_to_numeral(5, numeral);
 	ck_assert_str_eq("V", numeral);
+	free(numeral);
 }
 END_TEST
 
@@ -48,6 +59,7 @@ Suite * conversion_suite(void)
 	tc_core = tcase_create("Core");
 
 	tcase_add_test(tc_core, test_convert_I_to_1);
+	tcase_add_test(tc_core, test_convert_IV_to_4);
 	tcase_add_test(tc_core, test_convert_V_to_5);
 	tcase_add_test(tc_core, test_convert_1_to_I);
 	tcase_add_test(tc_core, test_convert_5_to_V);
