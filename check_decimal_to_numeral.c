@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <check.h>
-#include "check_decimal_to_roman.h"
+#include "check_decimal_to_numeral.h"
 #include "numeral_converter.h"
 
 #define MAX_LENGTH 12 // MMMCCCXXXIII
 
 /* Cases Covered
-	- Each individual numearl
+	- Each individual numeral
 	- Repeated numerals
 	- Lesser numeral before larger numeral
 	- Lesser numeral after larger numeral
@@ -185,12 +185,12 @@ START_TEST(test_convert_3999_to_MMMCMXCIX)
 }
 END_TEST
 
-Suite * decimal_to_roman_suite(void)
+Suite * decimal_to_numeral_suite(void)
 {
 	Suite *s;
 	TCase *tc_core;
 
-	s = suite_create("Decimal to Roman Tests");
+	s = suite_create("Decimal to Numeral Tests");
 
 	tc_core = tcase_create("Core");
 

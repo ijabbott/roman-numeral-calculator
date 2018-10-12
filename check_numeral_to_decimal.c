@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <check.h>
-#include "check_roman_to_decimal.h"
+#include "check_numeral_to_decimal.h"
 #include "numeral_converter.h"
 
 /* Cases Covered
-	- Each individual numearl
+	- Each individual numeral
 	- Repeated numerals
 	- Lesser numeral before larger numeral
 	- Lesser numeral after larger numeral
@@ -175,12 +175,12 @@ START_TEST(test_invalid_numeral_A)
 }
 END_TEST
 
-Suite * roman_to_decimal_suite(void)
+Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
 	TCase *tc_core;
 
-	s = suite_create("Roman to Decimal Tests");
+	s = suite_create("Numeral to Decimal Tests");
 
 	tc_core = tcase_create("Core");
 
