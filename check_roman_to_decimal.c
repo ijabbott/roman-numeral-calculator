@@ -48,6 +48,15 @@ START_TEST(test_convert_X_to_10)
 }
 END_TEST
 
+START_TEST(test_convert_XL_to_40)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("XL", &decimal);
+	ck_assert_int_eq(40, decimal);
+}
+END_TEST
+
 Suite * roman_to_decimal_suite(void)
 {
 	Suite *s;
@@ -62,6 +71,7 @@ Suite * roman_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_V_to_5);
 	tcase_add_test(tc_core, test_convert_IX_to_9);
 	tcase_add_test(tc_core, test_convert_X_to_10);
+	tcase_add_test(tc_core, test_convert_XL_to_40);
 
 	suite_add_tcase(s, tc_core);
 
