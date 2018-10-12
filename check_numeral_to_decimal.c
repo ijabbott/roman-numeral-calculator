@@ -229,6 +229,15 @@ START_TEST(test_invalid_numeral_DD)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_format)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IIV", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
@@ -262,6 +271,7 @@ Suite * numeral_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_invalid_numeral_VV);
 	tcase_add_test(tc_core, test_invalid_numeral_LL);
 	tcase_add_test(tc_core, test_invalid_numeral_DD);
+	tcase_add_test(tc_core, test_invalid_numeral_format);
 
 	suite_add_tcase(s, tc_core);
 
