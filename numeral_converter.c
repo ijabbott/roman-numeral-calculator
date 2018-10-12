@@ -52,10 +52,11 @@ void decimal_to_numeral(int decimal, char *numeral)
 static int is_numeral_valid(char *numeral)
 {
 	int list_index;
+	int string_index;
 	int numeral_index = 0;
-	int i;
 	int previous_value = decimal_list[numeral_index];
 
+	// Check for invalid characters
 	for(i = 0; i < strlen(numeral); i++)
 	{
 		if(strchr(valid_characters, numeral[i]) == NULL)
@@ -64,6 +65,7 @@ static int is_numeral_valid(char *numeral)
 		}
 	}
 
+	// Check for too many consecutive characters
 	if(strstr(numeral, "IIII") != NULL ||
 	   strstr(numeral, "XXXX") != NULL ||
 	   strstr(numeral, "CCCC") != NULL ||
@@ -74,7 +76,7 @@ static int is_numeral_valid(char *numeral)
 		return 0;
 	}
 	
-	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
+	// Check for correct order
 	while(numeral_index < strlen(numeral))
 	{
 		for(list_index = 0; list_index < NELEMS(numeral_list); list_index++)
