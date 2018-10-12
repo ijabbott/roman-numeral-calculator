@@ -175,6 +175,15 @@ START_TEST(test_invalid_numeral_A)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_IIII)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IIII", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
@@ -202,6 +211,7 @@ Suite * numeral_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_M_to_1000);
 	tcase_add_test(tc_core, test_convert_MMMCMXCIX_to_3999);
 	tcase_add_test(tc_core, test_invalid_numeral_A);
+	tcase_add_test(tc_core, test_invalid_numeral_IIII);
 
 	suite_add_tcase(s, tc_core);
 
