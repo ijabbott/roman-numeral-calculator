@@ -60,6 +60,7 @@ static int is_numeral_valid(char *numeral)
 	int numeral_index = 0;
 	int previous_value = decimal_list[numeral_index];
 
+	// Check for NULL or empty string
 	if(numeral == NULL || strlen(numeral) == 0)
 	{
 		return 0;
