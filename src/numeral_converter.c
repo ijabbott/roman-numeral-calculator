@@ -8,6 +8,10 @@
 
 static int is_numeral_invalid(char *numeral);
 static int decimal_outside_range(int decimal);
+static int invalid_numeral_empty_or_null(char *numeral);
+static int invalid_numeral_characters(char *numeral);
+static int invalid_consecutive_characters(char *numeral);
+static int invalid_numeral_order(char *numeral);
 
 const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -59,24 +63,37 @@ int decimal_to_numeral(int decimal, char *numeral)
 
 static int is_numeral_invalid(char *numeral)
 {
-	int previous_value = decimal_list[0];
-
-	// Check for NULL or empty string
-	if(numeral == NULL || strlen(numeral) == 0)
+	if(invalid_numeral_empty_or_null(numeral)  ||
+	   invalid_numeral_characters(numeral)     ||
+	   invalid_consecutive_characters(numeral) ||
+	   invalid_numeral_order(numeral))
 	{
 		return 1;
 	}
+	
+	return 0;
+}
 
-	// Check for invalid characters
-	for(int string_index = 0; string_index < strlen(numeral); string_index++)
+static int invalid_numeral_empty_or_null(char *numeral)
+{
+	return numeral == NULL || strlen(numeral) == 0;
+}
+
+static int invalid_numeral_characters(char *numeral)
+{
+	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
-		if(strchr(valid_characters, numeral[string_index]) == NULL)
+		if(strchr(valid_characters, numeral[numeral_index]) == NULL)
 		{
 			return 1;
 		}
 	}
 
-	// Check for too many consecutive characters
+	return 0;
+}
+
+static int invalid_consecutive_characters(char *numeral)
+{
 	if(strstr(numeral, "IIII") != NULL ||
 	   strstr(numeral, "XXXX") != NULL ||
 	   strstr(numeral, "CCCC") != NULL ||
@@ -86,8 +103,16 @@ static int is_numeral_invalid(char *numeral)
 	{
 		return 1;
 	}
-	
-	// Check for correct order
+
+	return 0;
+}
+
+static int invalid_numeral_order(char *numeral)
+{
+	int previous_value = decimal_list[0];
+
+	// Search the numeral and verify that each numeral or numeral pair is less than the numeral before it
+	// In the event of a numeral pair (IV, IX, etc.), the next numeral character must be different than the first character in the pair
 	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
 		for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
@@ -95,7 +120,6 @@ static int is_numeral_invalid(char *numeral)
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
 				if((decimal_list[list_index] > previous_value) || 
-				  // In the event of a numeral pair (IV, IX, etc.) check if the next numeral is the same as the first numeral in the pair
 				  (strlen(numeral_list[list_index]) == 2 && numeral_list[list_index][0] == numeral[numeral_index + 2])) 
 				{
 					return 1;
