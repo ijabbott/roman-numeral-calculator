@@ -1,9 +1,13 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 
+#define MIN_VALUE 1
+#define MAX_VALUE 3999
+
 static int is_numeral_invalid(char *numeral);
+static int decimal_outside_range(int decimal);
 
 const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -13,7 +17,7 @@ int numeral_to_decimal(char *numeral, int *decimal)
 {	
 	if(is_numeral_invalid(numeral))
 	{
-		return EXIT_FAILURE;
+		return 1;
 	}
 
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
@@ -30,11 +34,16 @@ int numeral_to_decimal(char *numeral, int *decimal)
 		}
 	}
 
-	return EXIT_SUCCESS;
+	return decimal_outside_range(*decimal);
 }
 
 int decimal_to_numeral(int decimal, char *numeral)
 {
+	if(decimal_outside_range(decimal))
+	{
+		return 1;
+	}
+
 	// Subtract the largest possible numeral value, adding that value to the string with each iteration
 	for(int list_index = 0; list_index < NELEMS(decimal_list); list_index++)
 	{
@@ -45,7 +54,7 @@ int decimal_to_numeral(int decimal, char *numeral)
 		}
 	}
 
-	return EXIT_SUCCESS;
+	return 0;
 }
 
 static int is_numeral_invalid(char *numeral)
@@ -55,7 +64,7 @@ static int is_numeral_invalid(char *numeral)
 	// Check for NULL or empty string
 	if(numeral == NULL || strlen(numeral) == 0)
 	{
-		return EXIT_FAILURE;
+		return 1;
 	}
 
 	// Check for invalid characters
@@ -63,7 +72,7 @@ static int is_numeral_invalid(char *numeral)
 	{
 		if(strchr(valid_characters, numeral[string_index]) == NULL)
 		{
-			return EXIT_FAILURE;
+			return 1;
 		}
 	}
 
@@ -75,7 +84,7 @@ static int is_numeral_invalid(char *numeral)
 	   strstr(numeral, "LL")   != NULL ||
 	   strstr(numeral, "DD")   != NULL)
 	{
-		return EXIT_FAILURE;
+		return 1;
 	}
 	
 	// Check for correct order
@@ -89,7 +98,7 @@ static int is_numeral_invalid(char *numeral)
 				  // In the event of a numeral pair (IV, IX, etc.) check if the next numeral is the same as the first numeral in the pair
 				  (strlen(numeral_list[list_index]) == 2 && numeral_list[list_index][0] == numeral[numeral_index + 2])) 
 				{
-					return EXIT_FAILURE;
+					return 1;
 				}
 				previous_value = decimal_list[list_index];
 				numeral_index += strlen(numeral_list[list_index]) - 1;
@@ -98,5 +107,10 @@ static int is_numeral_invalid(char *numeral)
 		}
 	}
 
-	return EXIT_SUCCESS;
+	return 0;
+}
+
+static int decimal_outside_range(int decimal)
+{
+	return decimal < MIN_VALUE || decimal > MAX_VALUE;
 }
