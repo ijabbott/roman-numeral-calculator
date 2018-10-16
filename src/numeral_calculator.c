@@ -34,9 +34,9 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 	int decimal1 = 0;
 	int decimal2 = 0;
 
-	if(numeral_to_decimal(operand1, &decimal1) == 0 && numeral_to_decimal(operand2, &decimal2) == 0)
+	if(numeral_to_decimal(operand1, &decimal1) == EXIT_SUCCESS && numeral_to_decimal(operand2, &decimal2) == EXIT_SUCCESS)
 	{
-		if(decimal_in_range(decimal1) == 0 && decimal_in_range(decimal2) == 0)
+		if(decimal_in_range(decimal1) == EXIT_SUCCESS && decimal_in_range(decimal2) == EXIT_SUCCESS)
 		{
 			if(op == ADDITION)
 			{
@@ -47,7 +47,7 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 				decimal_result = decimal1 - decimal2;
 			}
 
-			if(decimal_in_range(decimal_result) == 0)
+			if(decimal_in_range(decimal_result) == EXIT_SUCCESS)
 			{
 				decimal_to_numeral(decimal_result, numeral_result);
 				result = EXIT_SUCCESS;
