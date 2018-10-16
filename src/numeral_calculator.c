@@ -29,7 +29,7 @@ int subtract_numerals(char *operand1, char *operand2, char *difference)
 
 static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, Operation_T op)
 {
-	int result = 1;
+	int result = EXIT_FAILURE;
 	int decimal_result = 0;
 	int decimal1 = 0;
 	int decimal2 = 0;
@@ -50,7 +50,7 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 			if(decimal_in_range(decimal_result) == 0)
 			{
 				decimal_to_numeral(decimal_result, numeral_result);
-				result = 0;
+				result = EXIT_SUCCESS;
 			}
 		}
 	}
@@ -60,12 +60,5 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 
 static int decimal_in_range(int decimal)
 {
-	int result = 1;
-
-	if(decimal >= MIN_VALUE && decimal <= MAX_VALUE)
-	{
-		result = 0;
-	}
-
-	return result;
+	return decimal < MIN_VALUE || decimal > MAX_VALUE;
 }

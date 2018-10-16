@@ -13,7 +13,7 @@ int numeral_to_decimal(char *numeral, int *decimal)
 {	
 	if(is_numeral_invalid(numeral))
 	{
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
@@ -30,7 +30,7 @@ int numeral_to_decimal(char *numeral, int *decimal)
 		}
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int decimal_to_numeral(int decimal, char *numeral)
@@ -45,7 +45,7 @@ int decimal_to_numeral(int decimal, char *numeral)
 		}
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int is_numeral_invalid(char *numeral)
@@ -55,7 +55,7 @@ static int is_numeral_invalid(char *numeral)
 	// Check for NULL or empty string
 	if(numeral == NULL || strlen(numeral) == 0)
 	{
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	// Check for invalid characters
@@ -63,7 +63,7 @@ static int is_numeral_invalid(char *numeral)
 	{
 		if(strchr(valid_characters, numeral[string_index]) == NULL)
 		{
-			return 1;
+			return EXIT_FAILURE;
 		}
 	}
 
@@ -75,7 +75,7 @@ static int is_numeral_invalid(char *numeral)
 	   strstr(numeral, "LL")   != NULL ||
 	   strstr(numeral, "DD")   != NULL)
 	{
-		return 1;
+		return EXIT_FAILURE;
 	}
 	
 	// Check for correct order
@@ -89,7 +89,7 @@ static int is_numeral_invalid(char *numeral)
 				  // In the event of a numeral pair (IV, IX, etc.) check if the next numeral is the same as the first numeral in the pair
 				  (strlen(numeral_list[list_index]) == 2 && numeral_list[list_index][0] == numeral[numeral_index + 2])) 
 				{
-					return 1;
+					return EXIT_FAILURE;
 				}
 				previous_value = decimal_list[list_index];
 				numeral_index += strlen(numeral_list[list_index]) - 1;
@@ -98,5 +98,5 @@ static int is_numeral_invalid(char *numeral)
 		}
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
