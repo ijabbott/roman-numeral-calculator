@@ -2,25 +2,34 @@
 #include <string.h>
 #include "numeral_converter.h"
 
-typedef enum Operation_E
-{
-	ADDITION,
-	SUBTRACTION
-} Operation_T;
 
-static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, Operation_T op);
+static int add_decimals(int operand1, int operand2);
+static int subtract_decimals(int operand1, int operand2);
+static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, int (*operation)(int, int));
+
 
 int add_numerals(char *operand1, char *operand2, char *sum)
 {
-	return calculate_numerals(operand1, operand2, sum, ADDITION);
+	return calculate_numerals(operand1, operand2, sum, add_decimals);
 }
 
 int subtract_numerals(char *operand1, char *operand2, char *difference)
 {
-	return calculate_numerals(operand1, operand2, difference, SUBTRACTION);
+	return calculate_numerals(operand1, operand2, difference, subtract_decimals);
 }
 
-static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, Operation_T op)
+
+static int add_decimals(int operand1, int operand2)
+{
+	return operand1 + operand2;
+}
+
+static int subtract_decimals(int operand1, int operand2)
+{
+	return operand1 - operand2;
+}
+
+static int calculate_numerals(char *operand1, char *operand2, char *numeral_result, int (*operation)(int, int))
 {
 	int result = 1;
 	int decimal_result = 0;
@@ -29,14 +38,7 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 
 	if(numeral_to_decimal(operand1, &decimal1) == 0 && numeral_to_decimal(operand2, &decimal2) == 0)
 	{
-		if(op == ADDITION)
-		{
-			decimal_result = decimal1 + decimal2;
-		}
-		else if(op == SUBTRACTION)
-		{
-			decimal_result = decimal1 - decimal2;
-		}
+		decimal_result = operation(decimal1, decimal2);
 
 		if(decimal_to_numeral(decimal_result, numeral_result) == 0)
 		{
@@ -46,5 +48,4 @@ static int calculate_numerals(char *operand1, char *operand2, char *numeral_resu
 
 	return result;
 }
-
 

@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 
 #define MIN_VALUE 1
 #define MAX_VALUE 3999
+
 
 static int is_numeral_invalid(char *numeral);
 static int decimal_outside_range(int decimal);
@@ -13,9 +15,11 @@ static int invalid_numeral_characters(char *numeral);
 static int invalid_consecutive_characters(char *numeral);
 static int invalid_numeral_order(char *numeral);
 
+
 const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 const char valid_characters[] = {'M', 'D', 'C', 'L', 'X', 'V', 'I', '\0'};
+
 
 int numeral_to_decimal(char *numeral, int *decimal)
 {	
@@ -60,6 +64,7 @@ int decimal_to_numeral(int decimal, char *numeral)
 
 	return 0;
 }
+
 
 static int is_numeral_invalid(char *numeral)
 {
