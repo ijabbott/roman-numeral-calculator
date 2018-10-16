@@ -68,15 +68,17 @@ int decimal_to_numeral(int decimal, char *numeral)
 
 static int is_numeral_invalid(char *numeral)
 {
+	int result = 0;
+
 	if(invalid_numeral_empty_or_null(numeral)  ||
 	   invalid_numeral_characters(numeral)     ||
 	   invalid_consecutive_characters(numeral) ||
 	   invalid_numeral_order(numeral))
 	{
-		return 1;
+		result = 1;
 	}
 	
-	return 0;
+	return result;
 }
 
 static int invalid_numeral_empty_or_null(char *numeral)
@@ -86,19 +88,23 @@ static int invalid_numeral_empty_or_null(char *numeral)
 
 static int invalid_numeral_characters(char *numeral)
 {
+	int result = 0;
+
 	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
 		if(strchr(valid_characters, numeral[numeral_index]) == NULL)
 		{
-			return 1;
+			result = 1;;
 		}
 	}
 
-	return 0;
+	return result;
 }
 
 static int invalid_consecutive_characters(char *numeral)
 {
+	int result = 0;
+
 	if(strstr(numeral, "IIII") != NULL ||
 	   strstr(numeral, "XXXX") != NULL ||
 	   strstr(numeral, "CCCC") != NULL ||
@@ -106,10 +112,10 @@ static int invalid_consecutive_characters(char *numeral)
 	   strstr(numeral, "LL")   != NULL ||
 	   strstr(numeral, "DD")   != NULL)
 	{
-		return 1;
+		result = 1;
 	}
 
-	return 0;
+	return result;
 }
 
 static int invalid_numeral_order(char *numeral)
