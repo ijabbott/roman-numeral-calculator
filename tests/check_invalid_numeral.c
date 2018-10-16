@@ -92,7 +92,7 @@ START_TEST(test_invalid_numeral_format_IXI)
 {
 	int decimal = 0;
 	
-	numeral_to_decimal("II", &decimal);
+	numeral_to_decimal("IXI", &decimal);
 	ck_assert_int_eq(0, decimal);
 }
 END_TEST
