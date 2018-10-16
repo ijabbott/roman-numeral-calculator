@@ -88,6 +88,15 @@ START_TEST(test_invalid_numeral_format_IVI)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_format_IXI)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("II", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 START_TEST(test_invalid_numeral_format_VX)
 {
 	int decimal = 0;
@@ -115,6 +124,7 @@ Suite * invalid_numeral_suite(void)
 	tcase_add_test(tc_core, test_invalid_numeral_DD);
 	tcase_add_test(tc_core, test_invalid_numeral_format_IIV);
 	tcase_add_test(tc_core, test_invalid_numeral_format_IVI);
+	tcase_add_test(tc_core, test_invalid_numeral_format_IXI);
 	tcase_add_test(tc_core, test_invalid_numeral_format_VX);
 
 	suite_add_tcase(s, tc_core);
