@@ -11,22 +11,20 @@ const char valid_characters[] = {'M', 'D', 'C', 'L', 'X', 'V', 'I', '\0'};
 
 int numeral_to_decimal(char *numeral, int *decimal)
 {	
-	int numeral_index = 0;
-
 	if(!is_numeral_valid(numeral))
 	{
 		return 1;
 	}
 
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
-	while(numeral_index < strlen(numeral))
+	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
 		for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
 		{
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
 				*decimal += decimal_list[list_index];
-				numeral_index += strlen(numeral_list[list_index]);
+				numeral_index += strlen(numeral_list[list_index]) - 1;
 				break;
 			}
 		}
@@ -52,8 +50,7 @@ int decimal_to_numeral(int decimal, char *numeral)
 
 static int is_numeral_valid(char *numeral)
 {
-	int numeral_index = 0;
-	int previous_value = decimal_list[numeral_index];
+	int previous_value = decimal_list[0];
 
 	// Check for NULL or empty string
 	if(numeral == NULL || strlen(numeral) == 0)
@@ -82,7 +79,7 @@ static int is_numeral_valid(char *numeral)
 	}
 	
 	// Check for correct order
-	while(numeral_index < strlen(numeral))
+	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
 		for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
 		{
@@ -93,7 +90,8 @@ static int is_numeral_valid(char *numeral)
 					return 0;
 				}
 				previous_value = decimal_list[list_index];
-				numeral_index += strlen(numeral_list[list_index]);
+				numeral_index += strlen(numeral_list[list_index]) - 1;
+				break;
 			}
 		}
 	}
