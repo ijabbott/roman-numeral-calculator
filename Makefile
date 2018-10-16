@@ -6,7 +6,7 @@ LIB_FILES = src/numeral_calculator.c
 DEMO_PROGRAM = demo/demo_program.c
 DEMO_OUTPUT = demo_program
 LIB_NAME = libnumeralcalculator.a
-CFLAGS = -Wall
+CFLAGS = -Wall -std=c99
 TST_LIBS = -lcheck -lm -lpthread -lrt
 DIR = ./src
 
