@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdio.h>
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 
 static int is_numeral_valid(char *numeral);
@@ -85,12 +85,15 @@ static int is_numeral_valid(char *numeral)
 		{
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
-				if((decimal_list[list_index] > previous_value) || ((decimal_list[list_index] + previous_value) == decimal_list[list_index - 2]))
+				if((decimal_list[list_index] > previous_value) || 
+				  ((decimal_list[list_index] + previous_value) == decimal_list[list_index - 2])
+				  )
 				{
 					return 0;
 				}
 				previous_value = decimal_list[list_index];
-				numeral_index += strlen(numeral_list[list_index]);
+				numeral_index += strlen(numeral_list[list_index]) - 1;
+				break;
 			}
 		}
 	}
