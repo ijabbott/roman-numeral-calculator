@@ -70,11 +70,20 @@ START_TEST(test_invalid_numeral_DD)
 }
 END_TEST
 
-START_TEST(test_invalid_numeral_format)
+START_TEST(test_invalid_numeral_format_IIV)
 {
 	int decimal = 0;
 	
 	numeral_to_decimal("IIV", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
+START_TEST(test_invalid_numeral_format_IVI)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IVI", &decimal);
 	ck_assert_int_eq(0, decimal);
 }
 END_TEST
@@ -95,7 +104,8 @@ Suite * invalid_numeral_suite(void)
 	tcase_add_test(tc_core, test_invalid_numeral_VV);
 	tcase_add_test(tc_core, test_invalid_numeral_LL);
 	tcase_add_test(tc_core, test_invalid_numeral_DD);
-	tcase_add_test(tc_core, test_invalid_numeral_format);
+	tcase_add_test(tc_core, test_invalid_numeral_format_IIV);
+	tcase_add_test(tc_core, test_invalid_numeral_format_IVI);
 
 	suite_add_tcase(s, tc_core);
 
