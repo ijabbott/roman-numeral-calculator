@@ -86,8 +86,8 @@ static int is_numeral_valid(char *numeral)
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
 				if((decimal_list[list_index] > previous_value) || 
-				  ((decimal_list[list_index] + previous_value) == decimal_list[list_index - 2])
-				  )
+				  // In the event of a numeral pair (IV, IX, etc.) check if the next numeral is the same as the first numeral in the pair
+				  (strlen(numeral_list[list_index]) == 2 && numeral_list[list_index][0] == numeral[numeral_index + 2])) 
 				{
 					return 0;
 				}
