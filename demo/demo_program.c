@@ -54,11 +54,15 @@ int main(void)
 
 static void calculate_numerals(char *delimiters, char *buffer, int (*calculation)(char*, char*, char*))
 {
-	char *operand1 = malloc(MAX_STRING_SIZE);
-	char *operand2 = malloc(MAX_STRING_SIZE);
-	char *result = malloc(MAX_STRING_SIZE);
+	char operand1[15];
+	char operand2[15];
+	char result[15];
 
 	char *token;
+
+	memset(operand1, 0, sizeof(operand1));
+	memset(operand2, 0, sizeof(operand2));
+	memset(result, 0, sizeof(result));
 
 	token = strtok(buffer, delimiters);		
 	strcpy(operand1, token);
