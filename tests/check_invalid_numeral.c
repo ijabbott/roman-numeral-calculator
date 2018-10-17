@@ -115,6 +115,15 @@ START_TEST(test_invalid_numeral_format_VX)
 }
 END_TEST
 
+START_TEST(test_invalid_numeral_format_IXV)
+{
+	int decimal = 0;
+	
+	numeral_to_decimal("IXV", &decimal);
+	ck_assert_int_eq(0, decimal);
+}
+END_TEST
+
 Suite * invalid_numeral_suite(void)
 {
 	Suite *s;
@@ -136,6 +145,7 @@ Suite * invalid_numeral_suite(void)
 	tcase_add_test(tc_core, test_invalid_numeral_format_IXI);
 	tcase_add_test(tc_core, test_invalid_numeral_format_VXV);
 	tcase_add_test(tc_core, test_invalid_numeral_format_VX);
+	tcase_add_test(tc_core, test_invalid_numeral_format_IXV);
 
 	suite_add_tcase(s, tc_core);
 
