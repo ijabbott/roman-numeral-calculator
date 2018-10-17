@@ -8,34 +8,34 @@ The latest runnable test suite and demo program have been included in the reposi
 
 To run the test suite, run:
 
-	'./run_tests'
+	./run_tests
 
 To run the demo program, run:
 
-	'./run_demo'
+	./run_demo
 
 
 If you wish to build from source, a makefile has been provided.
 
 To build everything, run:
 
-	'make'
+	make
 
 or
 
-	'make all'
+	make all
 
 To build the test suite individually, run:
 
-	'make testsuite'
+	make testsuite
 
 To build the library individually, run:
 
-	'make library'
+	make library
 
 To build the demo program individually, run:
 
-	'make demoprogram'
+	make demoprogram
 
 
 
