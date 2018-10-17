@@ -9,11 +9,11 @@
 
 
 static int is_numeral_invalid(char *numeral);
-static int decimal_outside_range(int decimal);
 static int invalid_numeral_empty_or_null(char *numeral);
 static int invalid_numeral_characters(char *numeral);
 static int invalid_consecutive_characters(char *numeral);
 static int invalid_numeral_order(char *numeral);
+static int decimal_outside_range(int decimal);
 
 
 const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
