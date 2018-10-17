@@ -21,7 +21,7 @@ To build everything, run:
 
 	'make'
 
-	or
+or
 
 	'make all'
 
