@@ -121,6 +121,7 @@ static int invalid_consecutive_characters(char *numeral)
 static int invalid_numeral_order(char *numeral)
 {
 	int previous_value = decimal_list[0];
+	int previous_subtraction_base = 0;
 
 	// Search the numeral and verify that each numeral or numeral pair is less than the numeral before it
 	// In the event of a numeral pair (IV, IX, etc.), the next numeral character must be different than the first character in the pair
@@ -131,10 +132,16 @@ static int invalid_numeral_order(char *numeral)
 			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
 			{
 				if((decimal_list[list_index] > previous_value) || 
-				  (strlen(numeral_list[list_index]) == 2 && numeral_list[list_index][0] == numeral[numeral_index + 2])) 
+				  (previous_subtraction_base != 0 && decimal_list[list_index] + previous_value >= previous_subtraction_base)) 
 				{
 					return 1;
 				}
+
+				if(strlen(numeral_list[list_index]) == 2)
+				{
+					previous_subtraction_base = decimal_list[list_index - 1];
+				}
+
 				previous_value = decimal_list[list_index];
 				numeral_index += strlen(numeral_list[list_index]) - 1;
 				break;
