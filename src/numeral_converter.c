@@ -124,7 +124,7 @@ static int invalid_numeral_order(char *numeral)
 	int previous_subtraction_base = 0;
 
 	// Search the numeral and verify that each numeral or numeral pair is less than the numeral before it
-	// In the event of a numeral pair (IV, IX, etc.), the next numeral character must be different than the first character in the pair
+	// In the event of a numeral pair (IV, IX, etc.), the next numeral character must not make the pair exceed or equal the next greatest numeral value
 	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
 		for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
