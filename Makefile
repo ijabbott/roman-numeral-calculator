@@ -6,6 +6,7 @@ LIB_FILES = src/numeral_calculator.c
 DEMO_FILES = demo/demo_program.c
 DEMO_OUTPUT = run_demo
 LIB_NAME = libnumeralcalculator.a
+LIB_OBJECTS = numeral_calculator.o numeral_converter.o
 CFLAGS = -Wall -std=c99
 TST_LIBS = -lcheck -lm -lpthread -lrt
 DIR = ./src
@@ -17,7 +18,7 @@ testsuite: $(FILES) $(TEST_FILES)
 
 library: $(FILES)
 	$(CC) $(CFLAGS) $(FILES) -c
-	ar rcs $(LIB_NAME) $(LIB_FILES)
+	ar rcs $(LIB_NAME) $(LIB_OBJECTS)
 
 demoprogram: $(DEMO_FILES)
 	$(CC) $(CFLAGS) $(DEMO_FILES) -o $(DEMO_OUTPUT) -I $(DIR) ./$(LIB_NAME)
