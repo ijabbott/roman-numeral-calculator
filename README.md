@@ -4,7 +4,7 @@ This is a library that enables the user to add and subtract roman numerals.
 
 ### Usage
 
-The latest test suite and demo program have been included in the repository for convenience.
+The latest runnable test suite and demo program have been included in the repository for convenience.
 
 To run the test suite, run:
 
@@ -20,7 +20,9 @@ If you wish to build from source, a makefile has been provided.
 To build everything, run:
 
 	'make'
+
 	or
+
 	'make all'
 
 To build the test suite individually, run:
