@@ -20,6 +20,9 @@ library: $(FILES)
 	$(CC) $(CFLAGS) $(FILES) -c
 	ar rcs $(LIB_NAME) $(LIB_OBJECTS)
 
+test: library testsuite
+	./$(TEST_OUTPUT)
+
 demoprogram: $(DEMO_FILES)
 	$(CC) $(CFLAGS) $(DEMO_FILES) -o $(DEMO_OUTPUT) -I $(DIR) ./$(LIB_NAME)
 clean: 

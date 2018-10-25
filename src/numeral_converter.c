@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdio.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -14,7 +14,7 @@ static int invalid_numeral_characters(char *numeral);
 static int invalid_consecutive_characters(char *numeral);
 static int invalid_numeral_order(char *numeral);
 static int decimal_outside_range(int decimal);
-
+static int match_numeral(char *numeral, int *decimal, int index);
 
 const int decimal_list[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char *numeral_list[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -23,6 +23,8 @@ const char valid_characters[] = {'M', 'D', 'C', 'L', 'X', 'V', 'I', '\0'};
 
 int numeral_to_decimal(char *numeral, int *decimal)
 {	
+	int index_value = 0;
+
 	if(is_numeral_invalid(numeral))
 	{
 		return 1;
@@ -31,15 +33,8 @@ int numeral_to_decimal(char *numeral, int *decimal)
 	// Compare numeral character/s with the numeral list until there is a match, then shift the numeral index
 	for(int numeral_index = 0; numeral_index < strlen(numeral); numeral_index++)
 	{
-		for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
-		{
-			if(strncmp(&numeral[numeral_index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
-			{
-				*decimal += decimal_list[list_index];
-				numeral_index += strlen(numeral_list[list_index]) - 1;
-				break;
-			}
-		}
+		numeral_index += match_numeral(numeral, &index_value, numeral_index) - 1;
+		*decimal += index_value;
 	}
 
 	return decimal_outside_range(*decimal);
@@ -65,6 +60,22 @@ int decimal_to_numeral(int decimal, char *numeral)
 	return 0;
 }
 
+static int match_numeral(char *numeral, int *decimal, int index)
+{
+	int result = 0;
+	
+	for(int list_index = 0; list_index < NELEMS(numeral_list); list_index++)
+	{
+		if(strncmp(&numeral[index], numeral_list[list_index], strlen(numeral_list[list_index])) == 0)
+		{
+			*decimal = decimal_list[list_index];
+			result = strlen(numeral_list[list_index]);
+			break;
+		}
+	}
+
+	return result;
+}
 
 static int is_numeral_invalid(char *numeral)
 {

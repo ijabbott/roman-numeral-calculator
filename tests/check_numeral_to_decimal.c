@@ -165,6 +165,50 @@ START_TEST(test_convert_MMMCMXCIX_to_3999)
 }
 END_TEST
 
+/*START_TEST(test_match_I_1)
+{
+	int decimal = 0;
+	int index = 0;
+	int length = match_numeral("I", &decimal, index);
+	ck_assert_int_eq(1, decimal);
+	ck_assert_int_eq(1, length);
+}
+END_TEST
+
+START_TEST(test_match_IV_4)
+{
+	int decimal = 0;
+	int index = 0;
+	int length = match_numeral("IV", &decimal, index);
+	ck_assert_int_eq(4, decimal);
+	ck_assert_int_eq(2, length);
+}
+END_TEST
+
+START_TEST(test_match_II_2)
+{
+	int decimal = 0;
+	int length = match_numeral("II", &decimal, 0);
+	ck_assert_int_eq(1, decimal);
+	ck_assert_int_eq(1, length);
+	length = match_numeral("II", &decimal, 1);
+	ck_assert_int_eq(1, decimal);
+	ck_assert_int_eq(1, length);
+}
+END_TEST
+
+START_TEST(test_match_XCIX_99)
+{
+	int decimal = 0;
+	int length = match_numeral("XCIX", &decimal, 0);
+	ck_assert_int_eq(90, decimal);
+	ck_assert_int_eq(2, length);
+	length = match_numeral("XCIX", &decimal, 2);
+	ck_assert_int_eq(9, decimal);
+	ck_assert_int_eq(2, length);
+}
+END_TEST*/
+
 Suite * numeral_to_decimal_suite(void)
 {
 	Suite *s;
@@ -191,7 +235,10 @@ Suite * numeral_to_decimal_suite(void)
 	tcase_add_test(tc_core, test_convert_D_to_500);
 	tcase_add_test(tc_core, test_convert_M_to_1000);
 	tcase_add_test(tc_core, test_convert_MMMCMXCIX_to_3999);
-
+	/*tcase_add_test(tc_core, test_match_I_1);
+	tcase_add_test(tc_core, test_match_IV_4);
+	tcase_add_test(tc_core, test_match_II_2);
+	tcase_add_test(tc_core, test_match_XCIX_99);*/
 	suite_add_tcase(s, tc_core);
 
 	return s;
